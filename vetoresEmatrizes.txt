@@ -1,0 +1,57 @@
+vatores são uma sequência de elementos indexados por índices sequenciais (geralmente de 0 a n, sendo n o tamanho do vetor) que são armazenados em uma única variável. Ou seja, os vetores permitem que possamos armazenar múltiplos valores sem a necessidade de usar espaços na memória tanto quanto fosse a quantidade de valores que seriam armazenados.
+
+Vetores também chamados de matrizes quando possuem mais de uma dimensão (vetores podem ser entendidos como matrizes unidimensionais).
+
+Exemplo de vetor ou matriz unidimensional
+
+[a, e, i, o, u] - um vetor de tamnho cinco contendo as vogais latinas.
+ 0  1  2  3  4
+
+ [[1, 2, 3]
+  [4, 5, 6]] - uma matriz bidimensional.
+
+Em C, os vetores ou matrizes são declarados da seguinte forma:
+
+tipo nome_do_vetor[dim1][dim2]...[dimn];
+
+o elemento de um vator de n dimensões pode ser referenciado como nome_do_vetor[indice dim1][indice dim2]...[indice dimn].
+
+Exemplo: Supondo que matriz bidimensional mostrada acima seja declarada como int M_2x2[3][3]; (três linhas e três colunas). O valor 4 seria referenciado como M_2x2[2][1] (segunda linha, primeira coluna).
+
+Strings em C
+    Em C, strings são vetores de caracteres. Para declarar uma string usa-se a sintaxe:
+    
+    char nome_da_string[quantidade de caracteres]
+
+    Uma peculariedade da linguagem é que, ao armazenar a string na memória, o compilador adiciona um "\0" para indicar o final daquela cadeia de caracteres. Desse modo, para definir o tamanho de uma string, deve-se levar em conta a existência desse último caractere: Exemplo
+    
+    char str[6] = "Hello"
+
+    Apesar de "Hello" ter apenas cinco letras, é necessário definir a string com tamanho mínimo seis, pois o compiladorprecisa adicionar o "\0" no final para indica o final da cadeia.
+
+Funções para Strings
+    A biblioteca "string" contém algumas funções úteis para a manipulação de strings em C. Alguma delas são:
+
+        strcpy(str1, str2) - copia str2 em str1
+
+        strcat(s1, s2) - concatena s2 ao final de s1. Repare que s1 deve ter tamanho suficiente para receber os caracteres de s2.
+
+        strlen(s1) - retorna a quantidade de caracteres de s1 sem o "\0".
+
+        strchr(s1, ch) - retorna um ponteiro para a primeira ocorrência do caractere ch em s1.
+
+        strstr(s1, s2) - retorna um ponteiro para ocorrência de s2 em s1.
+
+        strcmp(s1, s2)
+            É uma função mais complexa que serve para comparar duas strings. A função analisa caractres de mesmo índice um a um da esquerda para direita e retorna os seguintes valores:
+
+            1 - quando o código ASCII do carectere de s1 for maior que de s2 (lembrando que os caracteres tem mesmo índice)
+
+            0 - quando s1 for igual a s2, ou seja, cada caratere de s1 é igual a s2.
+
+            -1 - quando, ao analisar dois caracteres de mesmo índice, o código ASCII do caractere em s2 for maior que de s1.
+
+        Outras funções
+            toupper(char ch) - incluida em "ctype", retorna o caractere em caixa alta.
+
+            atoi(char str*) - incluida em "stdlib", transforma a string em um inteiro 

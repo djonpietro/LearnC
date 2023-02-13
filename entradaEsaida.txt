@@ -1,0 +1,78 @@
+E/S pelo terminal em C (C: Completo e Total; capítulo 8)
+
+PARA LEITURA
+    getchar - recebe um único caractere (o primeiro digitado), apesar de dar eco. Possui um problema com o buffer quando se faz o reorno de carro, portanto não é muito utilizada.
+
+        Protótipo: int getchar(void)
+
+    getch - recebe um único caractere, sem eco e sem retorno de carro. Incluída na biblioteca CONIO.H
+
+        Protótipo: int getch(void)
+
+    getche - recebe um único caractere com eco, mas sem retorno de carro. Incluída na biblioteca CONIO.H.
+
+        Protótipo: int getche(void)
+
+    gets - recebe uma matriz de caractere (string)
+
+        Protótipo: char *gets(char *str)
+
+SAÍDA
+    putchar - imprime um caractere
+
+        Protótipo: int putchar(int c)
+
+    puts - imprime uma string
+
+        Protótipo: int puts(const char *str)
+    
+    printf - 
+
+        Protótipo: int printf(const char *string_decontorle,...);
+
+Códigos de Fomratação
+
+Para os tipos d, i, o, x e u, podemos antecedê-los com um l, que especificará um dado do tipo long - por exemplo %ld significa que o valor a ser imprimido é um long int - ou por um h, indicando um short, a exemplo de %su, que significa um unsigned short int. Para tipos de ponto flutuante (e, g e f), podemos usar usar L para indicar um long double.
+
+MODIFICADORES
+Entre % e o código de formato nos argumentos de printf, podemos inserir alguns valores que irão alterar a forma como o dado será exibido, sendo eles: largura, precisão e comprimento.
+
+    largura - geralmente é um inteiro que determina o número mínimo de espaços para escrever o valor de uma variável, por exemplo: printf("%6d", i) mostrará um inteiro i com no mínimo 6 casas decimais. Caso o valor da variável seja menor que o número especificado, então os espaços restantes serão preenchidos em branco. É possível preencher os espaços vazios, quando ocorrem, com zeros; basta escrever "%06d" por exemplo.
+
+    Precisão - no geral, ele específica o número de máximo de caracteres a serem imprimidos, porém seu comportamento depende do tipo ao qual ele é aplicado
+
+        inteiros (i, u, d, x, X, o) - é o número mínimo de caracteres que aparecerão para cada número, e se o valor seja inferior ao valor do modificador, o compilador irá preencher o os espaços restantes com zeros.
+
+        ponto flutuante (f, e, E) - determina o número de casas decimais que serão exibidas após o ponto decimal.
+
+        notação científica (g, G, e, E) - determina o número de algarismos significativos que serão exibidos.
+
+        caracteres ou strings (c, s) - é o número máximo de caracteres que serão exibidos. Caso seja uma string e o comprimento dela exceda o valr do modificador, os caracteres excedentes serão truncados.
+
+Também podemos utlizar doi outros modificadores: # e *. O primeiro tem seu comportamento em função do dado que acompanha.
+
+    ponto flutuante (g, G, f ou e) - garante que haverá um ponto decimal mesmo que o número não tenha casas decimais.
+
+    hexadecimais (x, X) - adiciona um 0x a esquerda do valor númerico.
+
+    octais (o) - adiciona um zero à esquerda do valor.
+
+Já o * é usado para substituir os valores númericos constantes usados nos modificadores de largura e precisão. Por exemplo: printf("%*.*f", 10, 4, 123.3); mostrará o dado do tipo float 123.3 com no mínimo 10 dígitos de largura e com 4 casas decimais para precisão.
+
+SCANF
+
+scanf é uma função da biblioteca STDIO.H que serve para ler dados do teclado com eco e retorno de carro. seu protótipo é: int scanf(const char *string_de_cotrole, ...);
+
+Na string de controle devemos colocacar o código do da dado de formatação do dado que será lido e o ponteiro da variável onde será armazenado o valor recebido, a exemplo de scanf("%d", &i), em que será lido um valor inteiro armazenado no ponteiro que identifica a variável i.
+
+Scanset - caso escrevamos scanf("%[abcd]", &str) o ponteiro que identifica a variável str irá armazenar os valores lidos até o primeiro caracter diferente do scanset [abcd]. Outro exemplo é scanf("%d%[abcd]%s", i, str1, str2); primeiro será lido um inteiro, armazenado em i, seguido de uma cadeia de caracteres contendo a, b, c ou d, que será armazenada na variável str1. Quando for encontrado o primeiro caractere diferente do scanset, o caracteres seguintes serão armazenados em str2.
+
+OBSERVAÇÕES E CUIDADOS ACERCA DAS FUNÇÕES DE ENTRADA
+
+scanf - durante a leitura de dados, scanf para de ler quando encontra no buffer o primeiro espaço, caracter nova linha ou retorno de carro (CR). Esses caracteres ficam salvos no buffer e influenciarão na operação do próximo scanf. Se o próximo scanf também ler uma string ou caractere, ele primeiro lerá o que já está no buffer, podendo ler aqueles caracteres citados.
+
+fgets - caso use essa função para ler strings a partir do teclado, quando o usuário der o retorno de carro, esse caractere será salvo na string, podendo gerar comportamentos idesejados.
+
+
+
+

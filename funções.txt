@@ -1,0 +1,43 @@
+Funções, em C, são blocos de intruções independentes.
+
+A forma geral é: tipo_retornado nome_da_função(lista_de_parâmetros)
+
+A lsita de parâmetros é uma sequência de variáveis cujos valores (ou endereços) são passados quando a função é chamado em outras funções (caso seja dentro da própria função, temos um caso de recursividade). Geralmente os parâmetros são declarados como: tipo_da_variável1 nome1,  tipo_da_variável2 nome2,...
+
+Escopo - variáveis declarados dentro d um bloco de função ou como parâmetros formais são variáveis locais, ou seja, só podem ser usadas dentro do bloco de intrução em que foram declaradas. As variáveis que não são declaradas em qualquer bloco de instrução são chamadas de globais, e podem ser acessadas por qualquer módulo do programa.
+
+Chamada de valor e referência
+    Em C podemos chamar passar um argumento para uma função por valor simplesmente colocando o valor que queremos que determinado parâmetro tenha (passando-os em ordem na qual foram declarados na declaração da função) ou passando o nome de uma variável simples. por exemplo
+
+    int sqrt(a){ return a * a}
+
+    int main(void){
+        printf("%d", sqrt(3));
+        return 0;
+    }
+
+    Passamos apenas o valor 3 para a função sqrt, e o módulo principal imprimirá 9.
+
+    Outro tipo de chamada é por referência, que em C é feita passando-se endereço de memória para a função, cujos parâmetros são declarados como ponteiros, por exemplo
+
+    void swap(int *a, int *b) //declarando ponteiros como parâmetros
+    {
+        int temp;
+
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+
+    int main(void){
+        int a=10, b=20;
+
+        swap(&a, &b);
+
+        printf("%d %d", a, b);
+    }
+
+    Esse programa troca os valors das variáveis a e b, com a função swap recebendo endereços de memória como parâmetros. Geralmente quando passamos matrizes para uma função, passamos apenas o nome da matriz para a função, que em C é a mesma coisa que passar o endereço de memória do primeiro elemento.
+
+argc e argv
+    podemos declarar a função main da seguinte maneira: int main(int argc, char *argv). Isso significa que no momento que executamos o programa pela linha de comando, podemos passar parâmetros para a execução desse programa, sendo que argc é a quantidade de parâmetros, e argv é uma matriz de ponteiros para strings que são os argumentos em si. Importante ressaltar que o primeiro argumento (argv[0]) é o nome do programa (ou caminho dependendo do SO). 

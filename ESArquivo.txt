@@ -1,0 +1,80 @@
+Funções do Sistema de Arquivo C Ansi
+
+fopen - abre um arquivo
+fclose - fecha um arquivo
+putc - escreve um caractere num arquivo
+fputc - o mesmo que putc
+getc - lê um caractere de um arquivo
+fgetc - o mesmo que getc
+fseek - posiciona o arquivo em um byte específico
+fprintf - o equivalente de printf para arquvios
+fscanf - o equivalente de scanf para arquivos
+feof - devolve Verdadeiro se o fim do arquivo foi atingindo
+ferror - retorna verdadeiro se houve algum problema com o arquivo
+rewind - reposiciona o indicador de posição do arquivo no início do arquivo
+remove - apaga um arquivo
+fflush - descarrega um arquivo
+
+Ponteiros para Arquivos
+    Um ponteiro para arquivo identifica um arquivo específico e é usado pela stream associada para realizar operações com aquele arquivo. Para declarar um ponteiro de arquivo, precisamos usar o tipo definido em STDIO.H FILE:
+
+    FILE *pf;
+
+    Em que pf é o identiicador do ponteiro
+
+Abrindo um Arquivo
+    Para abrir um arquivo, utilizamos a função fopen, cujo protótipo é:
+
+    FILE *fopen(const char* nomearq, const char* modo)
+
+    Em que nomearq é o caminho do arquivo (path), e modo é a forma como o arquivo será tratado. Os modos definidos para se abrir um arquivo em C são:
+
+    r - abre um aqruivo para leitura
+    w - cria um arquivo para escrita
+    a - anexa a um arquivo-texto
+    rb - abre um arquivo binário para leitura
+    wb - cria um arquivo binário para escrita
+    ab - anexa a um arquivo binário
+    r+ - abre um arquivo-texto para leitura e escrita
+    w+ - cria um arquivo-texto para leitura e escrita
+    a+ - anexa ou cria um arquivo texto para leitura e escrita
+    r+b - abre um arquivo binário para leitura e escrita
+    w+b - cria um arquivo binário para leitura e escrita
+    a+b - anexa ou cria um arquivo binário para leitura e escrita
+
+    Para abrir um arquivo texto para leitura, poderíamos fazer:
+
+    FILE *fp;
+    fp = fopen("text.txt", "r");
+
+    Entretanto, é mais comum (e profissional), utilizar algo como
+
+    FILE *fp
+    if ((fp = fopen("text.txt", "r")) == 1 )
+    {
+        printf("Houve problemas na abertura do arquivo\n");
+        exit(1);
+    } 
+
+    Com isso, garantimos que, caso ocorra um problema na abertura do arquivo - seja pela falta de permissão de leitura em disco, ou outro tipo de proteção - o programa encerrará naquele ponto, não acarretando em maiores problemas que poderiam comprometer outras partes do código.
+
+Fechando Arquivos
+    Para fechar um arquivo e garantir o salvamento de infomações em disco, utilizamos fclose, cujo protótipo é:
+
+    int fclose(*fp)
+
+    Em que fp é um ponteiro para arquivo. O valor de retorno de um fechamento bem-sucedido é 0, e qualquer outro valor indica erro no fechamento do arquivo, o que pode comprometer o salvamento das informações e o arquivo em si.
+
+Escrevendo e Lendo caracteres num arquivo
+    Para escrever um carctere num arquivo, podemos utilizar tanto putc quanto fputc. O protótipo de putc (que vale para fputc) é:
+
+    int putc(int ch, FILE *pf)
+
+    Em que pf é o ponteiro para o arquivo, e ch é o caractere a ser escrito. A função retorna o caractere escrito se a rotina foi bem sucedida, senão retorna EOF.
+
+    Já para gravar um caractere, podemos utilizar tanto getc quanto fgetc. O protótipo de getc é:
+
+    int getc(FILE *pf);
+
+    Em que pf é o ponteiro para o arquivo. A função retorna um inteiro com 0 como bit mais significativo, e caso chegue ao final do arquivo, a função retorna EOF. Ela tabmém retorna EOF quando ocorre erros.
+    

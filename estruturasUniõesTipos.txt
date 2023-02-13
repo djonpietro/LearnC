@@ -1,0 +1,149 @@
+ESTRUTURAS
+    Em C podemos definir tipos de dados heterogêneos chamadas de estruturas, que reúnem um grupo de variáveis referenciadas por meio de um nome, diferente dos vetores que são referenciados por índice. A definição geral de uma estrutura em C é feita como:
+
+    struct identificador {
+        tipo nome_da_variável;
+        tipo nome_da_variável;
+        .
+        .
+        .
+    };
+
+    Para declarar uma estrutura de um tipo definido, fazemos:
+
+    struct identificador_do_tipo idetificador_da_variavel;
+
+    também podemos declarar uma variável de estrutura assim que o tipo da estrutura é definido:
+
+    struct identificador {
+        tipo nome_da_variável;
+        tipo nome_da_variável;
+        .
+        .
+        .
+    } identificador_var1, identificador_var2,...;
+
+
+    Para referenciar os campos, utilizamos o operador ".", por exemplo
+
+    nome_da_estrutura.nome_do_campo
+
+    e desse modo podemos declarar campos com os valores desejados, imprimir seus valores, etc.
+
+    Matrizes de Estruturas - podemos definir matrizes cujos valores  são uma sequeência de estruturas. Primeiro precisa-se definir o tipo da estrutura como foi mostrado, em seguida fazemos a declaração:
+
+    struct identificador_da_estrutura  nome_da_matriz[tamanho];
+
+    Estruturas como Parâmetros de funções - os campos de estruturas podem ser passados normalmente como parâmetros para funções, seja por referência ou por valor. Por exemplo
+
+    struct estrutura1{
+        int a, b;
+        char ch;
+    };
+
+    void func(int parm1, int parm2, char parm3);
+
+    Se quiséssemos passar um dos campos da estutura estrutura1, escreveríamos a expressão:
+
+    func(a, b, ch);
+
+    Agora para passar uma estrutura inteira através de uma pasagem de valor para uma função, temos que primeiro definir a estrutura globalmente para que o tipo da estutura seja vísivel para a função, por exemplo:
+
+    struct estrutura1{
+        int a, b;
+        char ch;
+    };
+
+    void func(struct estrtura1 parm);
+
+    Se fizéssemos a definição do tipo da estrutura localmente, o tipo declarado na protótipo da função não seria visível, e o programa não seria compilado. 
+    
+    Quando uma estrutura inteira é passada como parâmetro, todos os seus campos são colocados na pilha do processo, de forma a aumentar o tempo de execução do programa, e caso haja muitos campos, isso pode se tornar incômodo. Para resolver isso, podemos passar o endereço da estrutura para uma função através de um ponteiro. A declaração de um ponteiro de estrutura é feio da seguinte forma:
+
+    struct nome_da_estrutura *nome_do_ponteiro;
+
+    Defininindo uma variável de estutura, passamos seu endereço para um ponteiro utiliando, como de práxis, o operador &:
+
+    nome_do_ponteiro_de_estrutura = &nome_da_variavel
+
+    Para referenciar os campos de uma estrutura através de um ponteiro, usamos o operador ->. Exemplo:
+
+    struct estrutura1{
+        int a, b;
+        char ch;
+    } estrut;
+
+    int main(void)
+     struct estrutura1 *p_estrut;
+
+     p_estrut = &estrut;
+     p_estrut->a = 10; /*Atribui o valor 10 ao campo "a" de estrut*/
+
+UNIONS
+    Unions são estruturas que permitem que variáveis de tipos diferente contenham o mesmo endereço de memória. Sua definição é feita de maneira totalmente homóloga a definição de estruturas:
+
+    union identificador_do_tipo{
+        tipo nome_da_var;
+        tipo nome_da_var;
+        tipo nome_da_var;
+        .
+        .
+        .
+    };
+
+    Por exemplo, suponha o fragmento de código:
+
+    union u_type{
+    int a;
+    char ch;
+    };
+
+    tanto a quanto ch compartilham o mesmo endereço de memória, contudo armazenam valores de tipos diferentes. Se fizéssemos uma atribuição ao campo a com o valor inteiro 65, estaríamos, ao mesmo tempo, atribuido o caractere 'A' para ch (já que o código ASCII de 'A' é 65). Unions são úteis para se fazer conversões de tipos não padrões.
+
+ENUMERAÇÕES
+    Enumerações são estruturas de dados compostas que referenciam um nome a uma determinada constante inteira. Sua definição é dada por:
+
+    enum identificador {nome1, nome2, nome3, ...};
+
+    Para declarar variáveis do tipo do identificador definido, procedemos da mesma forma para estruturas e uniões:
+
+    enum identificador {nome1, nome2, nome3, ...} var1, var2, ...;
+
+    ou
+
+    enum identificador {nome1, nome2, nome3, ...};
+
+    enum identificador var1, var2, ...;
+
+    Ao definir os nomes da enumeração, apenas estamos tratando constantes inteiras com outro nome, por exemplo:
+
+    enum identificador {A, B, C};
+
+    Os nomes A, B e C agora possuem, respectivamente, os valores 0, 1 e 2. Podemos também definir o valor da constante que será atribuido se fizermos:
+
+    enum identificador {A, B=100, C};
+
+    Nesta definição, teremos que A possui o valor 0, B possui 100 e C possui 101.
+
+DEFININDO TIPOS
+    Podemos definir nomes para tipos já existentes em C. Isso é útil para aumentar a portabilidade de programas, pois dados de tipos cujo comportamento depende da máquina poderiam ter seu tipo alterado apenas alterando o comando typedef.
+
+    Para fazermos uma definição, podemos proceder:
+
+    typedef float balance;
+
+    Esse comando cria um outro nome para o tipo float chamado balance, e assim podemos declar variáveis como:
+
+    balance a;
+
+    Em que a é uma variável do tipo balance, que é outro nome para float. Também podemos proceder dessa froma na hora de definir estruturas, uniões ou enumerações, por exemplo:
+
+    typedef struct_mystruct{
+        usigned u;
+        float f;
+    } mystruct;
+
+    E assim declar variáveis como
+
+    mystruct var;
+

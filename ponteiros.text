@@ -1,0 +1,74 @@
+Ponteiros, em C, são varíaveis que armazenam endereços de memória de outras varíaveis. Ponteiros podem ser declarados a partir dos tipos básicos: int, char, float e double, e a expressão de declaração de um ponteiro é:
+
+tipo * nome_do_ponteiro;
+
+Podemos utilizar dois operadores para manipular ponteiros e endereços de memória
+
+Seja x uma variável do tipo inteiro e necessita-se passar seu endereço para um ponteiro de nome p; a expressão que realiza isso é:
+
+p = &x;
+
+Agora queremos passar o valor da varíavel apontada por p para uma variável y. Iremos fazer isso através da expressão:
+
+y = *p;
+
+Aritmética de Ponteiros
+    Pode-se operar com operações aritméticas de soma e subtração com ponteiros. Se somarmos um valor inteiro a um ponteiro x a um ponteiro, faremos com que ele aponte para x-ésima próxima variável, e o mesmo vale para a subtração: se subtrairmos x de um ponteiro, ele apontará para o x-ésimo elemento anterior a ele.
+
+Ponteiros e Matrizes
+    Ponteiros e Matrizes, em C, estão intimamente relaciondados. Quando declaramos uma matriz, o nome dela passa a ser um ponteiro para o primeiro elemento. Com isso, aliado a aritmética de ponteiros, temos uma forma mais rápida em C de acessar os elementos. Por exemplo, para acessar o 5º elemento de uma matriz, temos duas formas
+
+    int vet[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    printf("%d", vet[4]); //indexação
+    printf("%d", *(vet+4)) //aritmética de ponteiro
+
+    A segunda forma é mais rápida, podendo ser mais vantajosa em determinados casos em que velocidade de execução é um fator relevante.
+
+    Também podemos declarar um matriz de ponteiros da seguinte forma
+
+    tipo *mat[TAM];
+
+    A matriz de inteiros mat irá armazenar endereços de memória de variáveis de determinado tipo. Podemos atribuir elementos a matriz procedendo:
+
+    mat[2] = &v2; //Ou seja, o enedereço da variável v2 será o terceiro elemento da matriz
+
+    e para acessar valores podemos fazer
+
+    *mat[2]; //acessar o valor do terceiro endereço armazenado na matriz, portanto, o valor de v2.
+
+Indireção Simples e Múltipla
+    Até agora, vimos um ponteiro que aponta para uma variável de determinado tipo. Porém ponteiros podem apontar para outros ponteiros. Indireção simples refere-se ao primeiro caso, e indireção múltipla trata-se do segundo.
+
+    int x=1, *p, **q;
+
+    p = &x; //o ponteiro p aponta para o valor de x
+    q = &p; //o ponteiro q aponta para o endereço de p
+
+    printf("%d", **q); //imprimi-se o valor apontado pelo endereço apontado por q, ou seja, o valor 1.
+
+    p irá armazenar o endereço de memória de x, e q armazenará o endereço de memória de p. Repare que para acessar o valor de x através de q necessitamos de dois asteriscos.
+
+    q - endereço do ponteiro p
+    *q - endereço apontado por p (endereço de x)
+    **q - valor da variável x
+    
+
+Ponteiros para Funções
+    Por vezes, em tempo de execução, podemos que determinada função seja executada ao invés de outra em determinado ponto do código. Quando uma função é chamada, o código-objeto (código gerado pelo compilador a partir do fonte), é feita uma chamada para o ponto de entrada, isto é, o endereço da função. Com isso, podemos definir ponteiros que conterão o endereço da função desejada, e chamá-la através desse ponteiro.
+
+    Para acessar o endereço de uma função, basta utilizar o nome da função sem os parênteses. Por exemplo, se um ponteiro p fosse receber o endereço de uma função fun que retorna valores inteiros, precederíamos
+
+    int (*p)();
+
+    p = fun;
+
+    Se uma função execut recebesse o endereço da função fun como parâmetro teríamos o protótipo de execut:
+
+    tipo_retornado execut(tipo a, tipo b,.... tipo (*funcao)())
+
+Alocação dinâmica de memória
+    A biblioteca STDLIB nos oferece duas funções para realizar alocação de memória em programas quando não sab até o tempo de execução o quanto de memória determinada variável/função/etc. precisará para ser armazenada. As funções são:
+
+    malloc - reserva tantos espaços de memória para variáveis de determinado tipo. Na prática, retorna um ponteiro (a priori, do tipo void) . Seu protótipo é 
+    void * malloc(size_t número_de_bytes) 

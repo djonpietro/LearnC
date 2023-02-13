@@ -1,0 +1,49 @@
+ARITMÉTICOS
+a + b - soma entre a e b
+a - b - diferença de a e b
+a * b - a multiplicado por b
+a / b - a dividido por b
+a % b - módulo da divisão de a por b
+
+--a - decremento de a em 1
+++a - incremento de 1 em a
+    Tanto -- quanto ++ podem ser colocados antes ou depois do nome da variável, como ++a e a++: ambos possuirão o mesmo efeito. Contudo, caso tenha-se
+
+    a = 10
+    y = ++a
+    x = a++
+
+    Então y será 11 e x será 10, pois neste último ele primeiro atribuirá o valor de a e depois irá realizar a operação de incremento. Em ambos os casos, ao final da operação, a = 11.
+
+LÓGICOS
+
+&& - and
+|| - or 
+! - not 
+
+RELACIONAIS
+> - maior que
+< - menor que
+>= - maior ou igual a 
+<= - menor ou igual a
+== - igual 
+!= - diferente 
+
+BIT A BIT
+
+& - AND 
+| - OR
+^ - XOR
+~ - Complemento de um ou NOT 
+>> - deslocamento a direita
+<< - deslocamento a esquerda
+
+    Nos operadores de deslocamento, caso os bits sejam deslocados por casas maiores que seu tamanho, sua informação se perde
+
+Operador ternário ?
+
+x = Exp1 ? Exp2: Exp3 - se Exp 1 for verdadeira, então a variável x recebe Exp2; se Exp1 for falsa, a variável x recebe o valor de Exp3.
+
+C reduzido - É como é chamada a técnica para abreviar atribuições que envolvem operadores aritméticos.
+
+    Por exemlo: a setença (var = var operador exp) pode ser reduzida para (var operador= exp).

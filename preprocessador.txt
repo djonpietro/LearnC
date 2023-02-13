@@ -1,0 +1,58 @@
+#define
+    define um identificador e uma string que irá o substituir toda vez que o identificador for encontrado no programa. A delcaração geral dessa macro é 
+
+    #define IDENTIFICADOR string
+
+    Ele funciona por exemplo:
+
+    #define PI 3.14
+
+    cump_circ = 2 * r * PI
+
+    Acima, definimos uma macro com identificador PI, e na linha seguinte realizamos um operação utilizando o identificador, que será substituido por 3.14 quando o vódigo for executado.
+
+    Esse tipo de recurso é últil na hora de definir determinado valores que aprecerão com recorrência no código, e cao seja necessário os alterar, basta os altrar na declaração da macro.
+
+    Também pode-se fazer operações, por exemplo
+
+    #define UM 1
+    #define DOIS UM+UM
+    #define TRES DOIS+UM
+
+    E podemos definir macros semlhantes a funções, como no exemplo
+    #define ABS(a) a>0 ? a : -1 * a
+
+    E ao longo do código, se quisermos o valor absoluto de um número, poderíamos usar ABS(num), sendo num uma variável. Esse tipo de abordagem pode ser vantajosa, pois exige menos memória para ser processada.
+
+#include
+    instrui ao compilador ler outro arquivo-fonte. O nome do arquivo deve estar entre aspas ou chaves angulares (< e >). Utiliza-se chaves angulares quando se quer que o compilador busque o arquivo em diretórios especiais para arquivos de inclusão, geralmente determinados pelo criador do compilador. Já as aspas são utilizadas quando se quer que o compilador procure o arquivo no diretório atual de trabalho, e caso ele não ache o arquivo, ele irá procurar onde os demais arquivos de inclusão estão.
+
+#if, #else, #elif e #endif
+    são usados quando há uma condição para que determinada parte do código seja compilada. Segue a forma geral de declaração
+
+    #if expressão
+        sequencia de comandos
+    #endif
+
+    Se expressão for verdadeira, então a sequencia de comandos é compilada. Ainda podemos adicionar a diretiva #else, que compilará um trecho de código caso expressão seja falsa.
+
+    #if expressao
+        comandos
+    #else 
+        comandos
+    #endif
+
+    Se quisermos adicionar mais condições relacionadas com expressao, podemos usar a diretiva #elif
+
+    #if expressao1
+        sequencia de comandos1
+    #elif expressao2
+        sequencia de comandos2
+    .
+    .
+    .
+    #else
+        sequencia de comandosn
+    #endif
+
+    Caso expressao1 seja falsa, o programa verificará se expressao2 é verdadeira; se for, a sequencia de comandos2 é compilada, senão a próxima expressão é avaliada. Se nenhuma expressão for verdadeira, então a sequencia definida em #else será compilada.

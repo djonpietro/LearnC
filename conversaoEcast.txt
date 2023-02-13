@@ -1,0 +1,11 @@
+Quando há operações entre valores de tipo diferentes, o compilador converte os tipos de todos os operando para o tipo de maior tamanho (promoção de tipo). Em ordem crescente temos que a conversão de tipo será feita na ordem:
+
+    unsigned int
+    long
+    unsigned long
+    float
+    double
+    long double
+
+Casts é como é chamado o modo para forçar que uma determinada operação seja de um tipo especificado. Em C, elas são feitas no modelo: (tipo) exp;
+

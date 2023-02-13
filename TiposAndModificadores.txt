@@ -1,0 +1,22 @@
+char: o valor amarzenado é um caractere somente, utilizando 1 byte de memória
+
+int: um número de inteiro de 32 bits (4 bytes). Sem modificadores de tipo, um bit é alocado para representar o sinal do número, e os outros a magnitude.
+
+float: número de ponto flutuante de precisão simples, normalmente 32 bits (4 bytes)
+
+double: número de ponto flutuante armazenado em 64 bits (8 bytes), tendo precisão dupla em relação ao float.
+
+void: um tipo usado para valores que não possuem tipos definidos
+
+Modificadores de tipos de dados: alteram os cinco tipos principais e a forma como são armazenados. São eles signed, unsigned, long e short.
+
+    signed é usado para dar sinal as valores do tipo char, já que seria redundante usá-lo junto com valores do tipo inteiro.
+
+    unsigned dá um bit a mais a magnitude de um valor, dando-o uma faixa maior de valores que pode representar. Por Exemplo: unsigned int permite ir da faixa (-2^31, 2^31) para (0, 2^32).
+
+    long dobra a quantidade de bits usados para armazenar o valor na memória.
+
+    short reduz a quantidade de bits usados para o armazenamento
+
+
+
