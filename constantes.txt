@@ -1,0 +1,12 @@
+Constantes são valores fixos de variáveis que não podem ser alterados pelo programa, protejendo-as de alterações indesejadas. Constantes podem ser dos 5 tipos básicos. Tentativas de alterar valores de constantes gerará um erro pelo compilador.
+
+Contantes de Ponto flutuante
+    Contantes de ponto flutuante, por padrão, são considerdas como do tipo float, porém podemos colocar um sufixo F ou f para indicar que queremos representar um valor do tipo float. Exemplo: 123.23F ou 123.23f.
+
+    Também podemos usar os sufixos U e L para usar os modificadores unsigned e long respectivamente.
+
+    Os números de ponto flutuante podem ser expressos em notação cinetífica, exemplo: 123.45 pode ser representado como 12.45e2, em que a parte a esquerda do e é a mantissa, e a direita é o expoente. O seu armazenamento é feito da seguinte forma: 1 bit para o sinal do expoente, 8 bits para o expoente, e 23 bits para a mantissa.
+
+Constantes de Strings
+    Valores alfanuméricos representados entre aspas duplas são cadeias de caractere para C, apesar de não existir um tipo string na linguagem.
+    
