@@ -3,6 +3,9 @@
 
 int main(void)
 {
+    char str[10];
+
+    register int i;
     printf("Hello World.\n");
 
     return 0;
