@@ -7,6 +7,7 @@ int main(void)
 
     register int i;
     printf("Hello World.\n");
+    printf("This is a test");
 
     return 0;
 }
