@@ -3,11 +3,16 @@
 
 int main(void)
 {
-    char str[10];
+    char str1[20], str2[20];
 
-    register int i;
-    printf("Hello World.\n");
-    printf("This is a test");
+    printf("Enter the first string: ");
+    gets(str1);
+
+    printf("Enter the second string: ");
+    gets(str2);
+
+    printf("%s\n", str1);
+    printf("%s", str2);
 
     return 0;
 }
