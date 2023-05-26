@@ -6,10 +6,10 @@ int main(void)
     char str1[20], str2[20];
 
     printf("Enter the first string: ");
-    gets(str1);
+    fgets(str1, 20, stdin);
 
     printf("Enter the second string: ");
-    gets(str2);
+    fgets(str2, 20, stdin);
 
     printf("%s\n", str1);
     printf("%s", str2);
