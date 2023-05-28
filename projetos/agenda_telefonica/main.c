@@ -27,7 +27,7 @@ void inserirContato(List* lista), removerContato(List* lista);
 
 void infoContato(List* lista), listarContatos(List* lista);
 
-void aniversariantes(List* lista);
+void aniversariantes(List* lista), contato_por_letra_inicial(List* lista);
 
 char* lerNome(void);
 
@@ -55,20 +55,34 @@ int main(void)
 
         switch (op){
             case 1:
-                /*inserirContato(lista);*/
+                inserirContato(lista);
                 break;
             
             case 2:
-                /*removerContato(lista);*/
+                removerContato(lista);
                 break;
 
             case 3:
-                /*strncpy(nome_buscado, lerNome(), TAM_NOME);*/
-            
+                infoContato(lista);
+                break;
+
+            case 4:
+                listarContatos(lista);
+                break;
+
+            case 5:
+                contato_por_letra_inicial(lista);
+                break;
+
+            case 6:
+                aniversariantes(lista);
+                break;
+
             case 7:
                 terminar(lista);
                 break; 
         }
+        putchar('\n');
     }
     list_destroy(lista);
     free(lista);
@@ -97,6 +111,9 @@ List* iniciar(void)
         exit(1);
     }
 
+    /*Para cada chamada de fsacnf, o programa deve fazer 5 atribuições.
+    Cada linha do arquivo, possui 5 valores separados por vírgula, e o conjunto
+    desses valores compõe um registro de Contato*/
     while (fscanf(contatos_aqv, "%[^,],%[^,],%d,%d,%d\n",
             contato_do_arquivo.nome,
             contato_do_arquivo.telefone,
@@ -104,7 +121,6 @@ List* iniciar(void)
             &contato_do_arquivo.niver.mes,
             &contato_do_arquivo.niver.ano) == 5) 
     {
-        printf("Entrei no loop\n");
         list_insert_next(lista, NULL, alocaContato(&contato_do_arquivo));        
     }
 
@@ -124,6 +140,7 @@ void terminar(List* lista)
 
     pt_walker = lista->head;
     
+    /*---------Salvando os registros no arquivo texto de disco----------*/
     while (pt_walker){
         registro_gravado = (Contato*) pt_walker->data;
         fprintf(contatos_aqv, "%s,%s,%d,%d,%d\n", 
@@ -150,6 +167,7 @@ Contato* alocaContato(Contato* contato)
         exit(1);
     }
 
+    /*---Preenchimento dos campos da estrutura alocada por pt_contato_alocado---*/
     strncpy(pt_contato_alocado->nome, contato->nome, TAM_NOME);
     strncpy(pt_contato_alocado->telefone, contato->telefone, TAM_TELNUM );
     pt_contato_alocado->niver.dia = contato->niver.dia;
@@ -158,3 +176,5 @@ Contato* alocaContato(Contato* contato)
 
     return pt_contato_alocado;
 }
+
+void inserirContato(List* lista){}
