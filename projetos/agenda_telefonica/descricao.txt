@@ -1,0 +1,53 @@
+Esse projeto é uma implementação de um simulador de lista telefônica simples proposta como atividade para a disciplina de Programaçao de computadores II. Os principais requisitos desse projeto são:
+
+- Quando o programa for iniciado, ele deve carregar dados de um arquivo texto e salvá-lo numa estrutura de lista encadeada.
+
+- Quando for encerrado, ele deve salvar os dados num arquivo texto de disco.
+
+- O registro de dados de cada contato deve conter os campos: nome, número de telefone, e data de aniversário.
+
+- O programa deve suportar as seguintes operações
+    * Inserir contatos
+    * Remover contatos
+    * Buscar e mostrar os dados de um contato pelo nome
+    * Listar todos os contato
+    * Listar contatos por letra inicial
+    * Listar os aniversariantes de um determinado mês
+
+A estrutura de dados será gerenciada por funções da biblioteca list.h, e entre os módulos do programa constam:
+
+List* iniciar(void) - módulo de incialização do programa. Ele aloca um ponteiro do tipo List* e o inicializa com a função list_init definida em list.h. Em seguida, ele abre e crrega os dados do arquivo texto que contém dados salvos anteriormente, inserindo-os em sequência na lista encadeada. O módulo retorna o endereço alocado para a inicializada lista.
+
+void terminar(List* lista) - o módulo de encerramento do programa. Ele recebe como argumento o endereço da lista utilizada para gerenciar os dados e os salva em sequência num arquivo texto. Em seguida, é chamada a função list_destroy para desalocar os endereços utilizados para alocar os dados do programa.
+
+void inserirContato(List* lista) - módulo de inserção de um contato na lista. O módulo aloca dinamicamente um ponteiro para estrutura Contato e cria uma iterface para o usuário preencher os campos do registro. Em seguida, o programa realiza um busca pela lista para determinar qual será o elemento que ficará uma posição antes do elemento que será inserido de forma que a liste fique ordenadda alfabeticamente. Uma vez determinado esse elemento, a função chama list_insert_next para inserir o elemento alocado na lista.
+
+void removerContato(List *lista) - o módulo lê do usuário o nome a ser removido e busca o elemento da lista que antecede o registro que contém esse nome. Em seguida ele, utiliza elemento antecessor para eliminar o contato desejado através da função list_remove_next. Depedendo do retorno de list_remove_next, o programa informa o sucesso ou falha na remoção, essa que ocorre quando o nome não exite na lista ou a lista está vazia.
+
+ListElem* pesquisarContato(List* lista, char* nome) - dado o parâmetro char* nome, o módulo busca na lista o elemento que antecede o item com aquele nome e retorna um ponteiro para esse elemento antecedente. 
+
+void infoContato(List* lista) - lê do usuário um nome e o busca na lista encadeada de forma a imprime as informações do regitro que contém o nome especificado.
+
+void listarContatos(List* lista) - percoree a lista imprimindo os todos os registros que ela contém.
+
+void contato_por_letra_incial(List* lista) - pergunta ao usuário qual letra inicial dos contatos a serem impressos e percorre a lista de modo a imprimir os registros dos contatos cujo nome começa com o caractere especificado. Se não há nenhum contato com aquela letra, então o programa informa ao usuário que nenhum contato possui aquela inicial.
+
+void aniversariantes(List* lista) - pergunta ao usuário o mẽs do qual ele quer saber os aniversariantes e percorre a lista imprmindo os nomes dos registros que contém o campo mes do aniversário igual ao mês especificado.
+
+char* lerNome(void) - rotina para leitura de strings. retorna um ponteiro para caracter com a string lida.
+
+Contato* alocaContato(Contato* registro_de_contato)  - rotina que aloca um ponteiro para estrutura Contato e incializa os seus campos com os dados do parâmetro registro_de_contato. O módulo retorna o ponteiro alocado com os campos inicializados.
+
+DA ESTUTURA UTILIZADA PARA COMPOR OS REGISTROS
+
+struct _Data{
+    int dia, mes, ano;
+}
+
+struct _Contato{
+    char nome[80];
+    char telefone[10];
+    struct _Data niver;
+}
+
+PONTOS IMPORTANTES DA IMPLEMENTAÇÃO
