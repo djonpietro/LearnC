@@ -72,8 +72,9 @@ int list_remove_next(List *list, ListElem *previous_elem)
         if(!(previous_elem->next))
             list->tail = previous_elem;
     }
-
-    list->destroy (data);
+    
+    if (list->destroy)
+        list->destroy (data);
     free(old_elem);
     list->size -= 1;
     return 1;
@@ -82,9 +83,7 @@ int list_remove_next(List *list, ListElem *previous_elem)
 void list_destroy(List* list)
 {
     register int i;
-
-    /*While list elements are removed, list->size will decrease, so we must guarantee
-    that this number will have been read exactly once.*/
+    
     for (i = list->size; i != 0; --i)
         list_remove_next(list, NULL);
 }
