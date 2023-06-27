@@ -17,7 +17,7 @@ typedef struct _Contato{
     Data niver;
 } Contato;
 
-ListElem* pesquisarContato(List* lista, char* nome);
+ListElem* pesquisar_contato_anterior(List* lista, char* nome);
 
 List* iniciar(void);
 
@@ -29,7 +29,7 @@ void infoContato(List* lista), listarContatos(List* lista);
 
 void aniversariantes(List* lista), contato_por_letra_inicial(List* lista);
 
-char* lerNome(void);
+void lerString(char* str);
 
 Contato* alocaContato(Contato* contato);
 
@@ -70,13 +70,13 @@ int main(void)
                 listarContatos(lista);
                 break;
 
-            case 5:
+            /*case 5:
                 contato_por_letra_inicial(lista);
                 break;
 
             case 6:
                 aniversariantes(lista);
-                break;
+                break;*/
 
             case 7:
                 terminar(lista);
@@ -177,4 +177,135 @@ Contato* alocaContato(Contato* contato)
     return pt_contato_alocado;
 }
 
-void inserirContato(List* lista){}
+void inserirContato(List* lista){
+    Contato novo_contato;
+    ListElem* pt_walker;
+
+    /*------------Preenchimento dos campos pelo usuário---------*/
+    printf("Nome: ");
+    lerString(novo_contato.nome);
+    printf("Número de Telefone: ");
+    lerString(novo_contato.telefone);
+    printf("Data de aniversário [d/m/aaaa]: ");
+    scanf("%d/%d/%d", &novo_contato.niver.dia, &novo_contato.niver.mes, &novo_contato.niver.ano);
+
+    pt_walker = lista->head;
+    
+    /*inserção na lista vazia*/
+    if (lista->head == NULL){
+        list_insert_next(lista, NULL, alocaContato(&novo_contato));
+        return;
+    }
+
+    /*inserção na cabeça da lista*/
+    else if (strcmp(novo_contato.nome, ((Contato*) pt_walker->data)->nome) < 0){
+        list_insert_next(lista, NULL, alocaContato(&novo_contato));
+        return;
+    }
+
+    /*inserção no meio da lista*/
+    while (pt_walker->next){
+        if (strcmp(novo_contato.nome, ((Contato*) pt_walker->next->data)->nome) < 0){
+            list_insert_next(lista, pt_walker, alocaContato(&novo_contato));
+            return;
+        }
+    }
+
+    /*inserção no final da lista da lista*/
+    list_insert_next(lista, lista->tail, alocaContato(&novo_contato));
+}
+
+void lerString(char* str)
+{
+    scanf("%[^\n]", str);
+    setbuf(stdin, NULL);
+}
+
+void removerContato(List* lista)
+{
+    char nome_a_ser_removido[TAM_NOME];
+    ListElem* elemento_anterior_ao_removido;
+
+    if (!lista->size){
+        printf("A lista está vazia\n");
+        return;
+    }
+
+    printf("Digite o nome do contato a ser removido: ");
+    lerString(nome_a_ser_removido);
+
+    elemento_anterior_ao_removido = pesquisar_contato_anterior(lista, nome_a_ser_removido);
+
+    if (!list_remove_next(lista, elemento_anterior_ao_removido))
+        printf("O nome não consta na lista\n");
+    else
+        printf("O nome foi removido com sucesso\n");
+}
+
+ListElem* pesquisar_contato_anterior(List* lista, char* nome)
+{
+    ListElem* pt_walker;
+    
+    pt_walker = lista->head;
+
+    /*verifica se o elemento procurado é o head da lista*/
+    if (!strcmp(nome, ((Contato*) pt_walker->data)->nome))
+        return NULL;
+
+    /*Verifica qual é o elemento que antecede ao procurado e quando
+    o acha, retorna um ponteiro para ele*/
+    while (pt_walker->next){
+        if (!strcmp(nome, ((Contato*) pt_walker->next->data)->nome))
+            return pt_walker;
+        
+        pt_walker = pt_walker->next;
+    }
+    
+    /*Se o nome não existe na lista, então o tail da lista é retornado*/
+    return lista->tail;
+}
+
+void infoContato(List* lista)
+{
+    char nome_buscado[TAM_NOME];
+    ListElem* elemento_anterior_ao_buscado;
+    Contato* registro;
+
+    if (!lista->size){
+        printf("A lista está vazia\n");
+        return;
+    }
+
+    printf("Nome a ser buscado: ");
+    lerString(nome_buscado);
+    elemento_anterior_ao_buscado = pesquisar_contato_anterior(lista, nome_buscado);
+
+    if (elemento_anterior_ao_buscado == lista->tail){
+        printf("O nome não consta na lista\n");
+        return;
+    }
+
+    if (elemento_anterior_ao_buscado == NULL)
+        registro = (Contato *) lista->head->data;
+    else
+        registro = (Contato*) elemento_anterior_ao_buscado->next->data;
+
+    printf("%s\n", registro->nome);
+    printf("%s\n", registro->telefone);
+    printf("Aniversário: %d/%d/%d\n", registro->niver.dia, registro->niver.mes, registro->niver.ano);
+}
+
+void listarContatos(List* lista){
+    ListElem* pt_walker;
+    Contato* registro;
+
+    pt_walker = lista->head;
+    while (pt_walker){
+        registro = (Contato*) pt_walker->data;
+        printf("%s\n", registro->nome);
+        printf("%s\n", registro->telefone);
+        printf("%d/%d/%d\n", registro->niver.dia, registro->niver.mes, registro->niver.ano);
+        putchar('\n');
+        pt_walker = pt_walker->next;
+    }
+}
