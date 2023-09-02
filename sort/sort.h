@@ -1,15 +1,15 @@
 #ifndef SORT_H
 #define SORT_H
 
-void bubble_sort(int* v, int size);
+void bubble_sort(int* v, int start, int end);
 
-void selection_sort(int* v, int size);
+void selection_sort(int* v, int start, int end);
 
-void insertion_sort(int* v, int size);
+void insertion_sort(int* v, int start, int end);
 
-void merge_sort(int* v, int size);
+void merge_sort(int* v, int start, int end);
 
-void merge(int*v, int* left_array, int* right_array, int size_right, int size_left);
+void merge(int*v, int start, int* left_array, int* right_array, int left_size, int right_size);
 
 void quicksort(int* v, int start, int end);
 
