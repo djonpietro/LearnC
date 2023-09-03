@@ -1,6 +1,7 @@
 #include "sort.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 void swap(int* v, int a, int b){
     int temp;
@@ -45,17 +46,24 @@ int partition(int* v, int start, int end) {
     int ppivot = (rand() % (end - start + 1)) + start;
     register int i, j;
 
-    swap(v, ppivot, start);
+    printf("%d %d\n", v[ppivot], ppivot);
+
+    swap(v, start, ppivot);
     ppivot = start;
 
-    i = start+1; j = end;
+    i = ppivot; j = end+1;
 
     while (i < j) {
-        while (v[i] < v[ppivot] && i < end) i++;
-    
-        while (v[j] >= v[ppivot] && j > ppivot) j--;
+        do {
+            i++;
+        } while (v[i] <= v[ppivot] && i < end);
 
-        if (i < j) swap(v, i, j);
+        do {
+            j--;
+        } while (v[j] > v[ppivot] && j > ppivot);
+
+        if (i < j)
+            swap(v, i, j);
     }
 
     swap(v, ppivot, j);
